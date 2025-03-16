@@ -21,7 +21,12 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            session.createSQLQuery("CREATE TABLE IF NOT EXISTS preproect_1_1_3.users" + "(Id BIGINT PRIMARY KEY AUTO_INCREMENT" + ",Name VARCHAR(50)" + ",LastName VARCHAR(50)" + ", age TINYINT)").executeUpdate();
+            session.createSQLQuery("CREATE TABLE IF NOT EXISTS users"
+                    + "(Id BIGINT PRIMARY KEY AUTO_INCREMENT"
+                    + ",Name VARCHAR(50)"
+                    + ",LastName VARCHAR(50)"
+                    + ", age TINYINT)")
+                    .executeUpdate();
 
             transaction.commit();
         } catch (Exception e) {
@@ -39,7 +44,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            session.createSQLQuery("DROP TABLE IF EXISTS preproect_1_1_3.users").executeUpdate();
+            session.createSQLQuery("DROP TABLE IF EXISTS users").executeUpdate();
 
             transaction.commit();
         } catch (Exception e) {
@@ -77,8 +82,8 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction = session.beginTransaction();
 
-            User user_ex = session.get(User.class, id);
-            session.remove(user_ex);
+            User userEx = session.get(User.class, id);
+            session.remove(userEx);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -116,7 +121,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            session.createSQLQuery("TRUNCATE preproect_1_1_3.users").executeUpdate();
+            session.createSQLQuery("TRUNCATE users").executeUpdate();
 
             transaction.commit();
         } catch (Exception e) {
